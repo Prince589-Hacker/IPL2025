@@ -47,7 +47,7 @@ app.get('/stream.m3u8', async (req, res) => {
 // Proxy the .ts segment files with headers
 app.get('/segments/:segment', async (req, res) => {
   const segment = req.params.segment;
-  const segmentUrl = `https://user65473.hls-video.net/user/token/a3f0c81db39d64f85b6f6a5cfaa1b2ce/${segment}?token=${token}`;
+  const segmentUrl = `https://userx3565.hls-video.net/user/token/a3f0c81db39d64f85b6f6a5cfaa1b2ce/${segment}?token=${token}`;
 
   try {
     const response = await axios.get(segmentUrl, {
