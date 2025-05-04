@@ -32,7 +32,7 @@ app.get('/stream.m3u8', async (req, res) => {
 
     // Rewrite the URLs in the playlist to point to /segments/ on our server
     const rewrittenPlaylist = originalPlaylist.replace(
-      /https:\/\/usertoken1\.hls-video\.net\/ts1\/token\/[^/]+\/(tn478cnu2o0q_\d+)\?token=[^ \n]+/g,
+      /https:\/\/userx3565\.hls-video\.net\/ts1\/token\/[^/]+\/(tn478cnu2o0q_\d+)\?token=[^ \n]+/g,
       (match, segment) => `/segments/${segment}`
     );
 
