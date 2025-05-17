@@ -1,10 +1,10 @@
+const functions = require('firebase-functions/v2');
 const express = require('express');
 const axios = require('axios');
-const path = require('path');
 const app = express();
 const port = 3000;
 
-const playlistUrl = 'https://usertoken1.hls-video.net/media2/token/a3f0c81db39d64f85b6f6a5cfaa1b2ce/stream.m3u8?token=7e95535326220e90013338b935f40476';
+const playlistUrl = 'https://userx3565.hls-video.net/media2/token/a3f0c81db39d64f85b6f6a5cfaa1b2ce/stream.m3u8?token=7e95535326220e90013338b935f40476';
 const token = '7e95535326220e90013338b935f40476';
 
 // Custom headers
@@ -32,9 +32,9 @@ app.get('/stream.m3u8', async (req, res) => {
 
     // Rewrite the URLs in the playlist to point to /segments/ on our server
     const rewrittenPlaylist = originalPlaylist.replace(
-      /https:\/\/userx3565\.hls-video\.net\/ts1\/token\/[^/]+\/(tn478cnu2o0q_\d+)\?token=[^ \n]+/g,
+      /https:\/\/userx3565\.hls-video\.net\/ts1\/token\/[^/]+\/([^?]+)\?token=[^ \n]+/g,
       (match, segment) => `/segments/${segment}`
-    );
+    );    
 
     res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
     res.send(rewrittenPlaylist);
@@ -44,10 +44,11 @@ app.get('/stream.m3u8', async (req, res) => {
   }
 });
 
-// Proxy the .ts segment files with headers
 app.get('/segments/:segment', async (req, res) => {
   const segment = req.params.segment;
-  const segmentUrl = `https://userx3565.hls-video.net/user/token/a3f0c81db39d64f85b6f6a5cfaa1b2ce/${segment}?token=${token}`;
+  const segmentUrl = `https://userx3565.hls-video.net/ts1/token/a3f0c81db39d64f85b6f6a5cfaa1b2ce/${segment}?token=${token}`;
+
+  console.log(segmentUrl);
 
   try {
     const response = await axios.get(segmentUrl, {
@@ -65,6 +66,8 @@ app.get('/segments/:segment', async (req, res) => {
 // Serve frontend
 app.use(express.static('public'));
 
+// exports.api = functions.https.onRequest(app);
+
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server is listening on port ${port}`);
 });
