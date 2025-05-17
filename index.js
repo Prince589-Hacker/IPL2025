@@ -1,4 +1,4 @@
-const functions = require('firebase-functions/v2');
+
 const express = require('express');
 const axios = require('axios');
 const app = express();
